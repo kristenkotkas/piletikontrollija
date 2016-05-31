@@ -1,0 +1,19 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/dafault</item>
+        <item name="colorPrimaryDark">@color/dafault</item>
+        <item name="colorAccent">@color/dafault</item>
+        <item name="android:statusBarColor">@color/bar</item>
+        <item name="android:navigationBarColor">@color/bar</item>
+        <item name="android:background">@color/dafault</item>
+    </style>
+
+    <style name="TextStyle">
+        <item name="android:fontFamily">ticketfont2.tff</item>
+
+    </style>
+
+</resources>
