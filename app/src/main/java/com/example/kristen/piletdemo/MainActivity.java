@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout linLay, grid;
-    private TextView ticket, amount;
+    private TextView ticket, amount, totalAmount;
     private LinearLayout space;
     private Button doMagic;
     private List<LinearLayout> tickets;
@@ -26,8 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.doMagic = (Button) findViewById(R.id.doMagic);
-        tickets = ticketMaker(
+        tickets = ticketMaker( //PLACE YOUR TEXT HERE
                 "testÜritus\n" +
                         "17/06/16 19:50\n" +
                         "laste pilet: 4\n" +
@@ -35,18 +34,10 @@ public class MainActivity extends AppCompatActivity {
                         "tavapilet: 6\n" +
                         "38.00 £");
 
-        this.doMagic.setOnClickListener(new View.OnClickListener() {
-
-            TableLayout tableLay = (TableLayout) findViewById(R.id.tabelLay);
-            @Override
-            public void onClick(View v) {
-                tableLay.removeAllViews();
-                for (LinearLayout elem: tickets) {
-                    tableLay.addView(elem);
-                }
-
-            }
-        });
+        TableLayout tableLay = (TableLayout) findViewById(R.id.tabelLay);
+        for (LinearLayout elem: tickets) {
+            tableLay.addView(elem);
+        }
     }
 
     public LinearLayout rowMaker(String info, int kogus) {
@@ -92,18 +83,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public List<LinearLayout> ticketMaker(String ticket) {
-        String eventName, dateTime, total;
+        String eventName, dateTime;
         String[] texts;
         List<LinearLayout> result = new ArrayList<>();
 
         texts = ticket.split("\n");
         eventName = texts[0];
         dateTime = texts[1];
-        total = texts[texts.length-1];
+
+        int total = 0;
+        totalAmount = (TextView) findViewById(R.id.totalAmount);
 
         for (int i = 2; i < texts.length-1; i++) {
+            total = total + Integer.parseInt(texts[i].split(": ")[1]);
             result.add(rowMaker(texts[i].split(": ")[0], Integer.parseInt(texts[i].split(": ")[1])));
         }
+        totalAmount.setText(Integer.toString(total));
         return result;
     }
 }
