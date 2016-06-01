@@ -11,14 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
-    private LinearLayout linLay;
-    private TextView ticket;
-    private TextView amount;
+    private LinearLayout linLay, grid;
+    private TextView ticket, amount;
     private LinearLayout space;
     private Button doMagic;
-    private LinearLayout grid;
-
+    private List<LinearLayout> tickets;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -26,14 +27,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         this.doMagic = (Button) findViewById(R.id.doMagic);
+        tickets = ticketMaker(
+                "testÜritus\n" +
+                        "17/06/16 19:50\n" +
+                        "laste pilet: 4\n" +
+                        "kallim pilet: 3\n" +
+                        "tavapilet: 6\n" +
+                        "38.00 £");
+
         this.doMagic.setOnClickListener(new View.OnClickListener() {
 
             TableLayout tableLay = (TableLayout) findViewById(R.id.tabelLay);
-            int nr = 1;
             @Override
             public void onClick(View v) {
-                tableLay.addView(rowMaker("tere", nr));
-                nr++;
+                tableLay.removeAllViews();
+                for (LinearLayout elem: tickets) {
+                    tableLay.addView(elem);
+                }
+
             }
         });
     }
@@ -78,5 +89,21 @@ public class MainActivity extends AppCompatActivity {
         grid.addView(space);
 
         return grid;
+    }
+
+    public List<LinearLayout> ticketMaker(String ticket) {
+        String eventName, dateTime, total;
+        String[] texts;
+        List<LinearLayout> result = new ArrayList<>();
+
+        texts = ticket.split("\n");
+        eventName = texts[0];
+        dateTime = texts[1];
+        total = texts[texts.length-1];
+
+        for (int i = 2; i < texts.length-1; i++) {
+            result.add(rowMaker(texts[i].split(": ")[0], Integer.parseInt(texts[i].split(": ")[1])));
+        }
+        return result;
     }
 }
