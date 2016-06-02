@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout space;
     private Button scan;
     private List<LinearLayout> tickets;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -47,18 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 integrator.initiateScan();
             }
         });
-        tickets = ticketMaker( //PLACE YOUR TEXT HERE
-                "testÜritus\n" +
-                        "17/06/16 19:50\n" +
-                        "laste pilet: 4\n" +
-                        "kallim pilet: 3\n" +
-                        "tavapilet: 6\n" +
-                        "38.00 £");
-
-        TableLayout tableLay = (TableLayout) findViewById(R.id.tabelLay);
-        for (LinearLayout elem: tickets) {
-            tableLay.addView(elem);
-        }
     }
 
     public LinearLayout rowMaker(String info, int kogus) {
@@ -129,6 +119,12 @@ public class MainActivity extends AppCompatActivity {
         if (scanResult != null) {
             String result = scanResult.getContents();
             Log.d("code", result);
+            tickets = ticketMaker(result);
+            TableLayout tableLay = (TableLayout) findViewById(R.id.tabelLay);
+            tableLay.removeAllViews();
+            for (LinearLayout elem: tickets) {
+                tableLay.addView(elem);
+            }
         }
     }
 }
