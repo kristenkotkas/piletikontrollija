@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout linLay, grid;
     private TextView ticket, amount, totalAmount;
     private LinearLayout space;
-    private Button doMagic;
+    private Button scan;
     private List<LinearLayout> tickets;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        scan = (Button) findViewById(R.id.btnScan);
         tickets = ticketMaker( //PLACE YOUR TEXT HERE
                 "testÜritus\n" +
                         "17/06/16 19:50\n" +

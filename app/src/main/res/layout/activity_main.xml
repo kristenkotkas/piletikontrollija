@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:id="@+id/scrollView"
-            android:layout_alignParentEnd="true" android:layout_marginBottom="60dp"
+            android:layout_alignParentEnd="true" android:layout_marginBottom="130dp"
             android:layout_marginTop="70dp">
         <TableLayout
                 android:id="@+id/tabelLay"
@@ -37,7 +37,8 @@
     </ScrollView>
     <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="40dp"
                   android:background="#ffffff"
-                  android:layout_alignParentBottom="true" android:layout_alignParentStart="true">
+                  android:layout_alignParentBottom="true" android:layout_alignParentStart="true"
+                  android:layout_marginBottom="60dp">
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:textAppearance="?android:attr/textAppearanceMedium" android:text="@string/total"
                   android:id="@+id/textView3" android:background="#ffffff" android:textSize="25sp"
@@ -48,4 +49,11 @@
                   android:layout_gravity="center_vertical|right" android:textAlignment="textEnd"
                   android:layout_marginRight="20dp"/>
     </LinearLayout>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="scan"
+            android:id="@+id/btnScan"
+            android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"/>
 </RelativeLayout>
