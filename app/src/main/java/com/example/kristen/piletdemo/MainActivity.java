@@ -1,15 +1,19 @@
 package com.example.kristen.piletdemo;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +31,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         scan = (Button) findViewById(R.id.btnScan);
+        //loome scanneri vms //https://github.com/journeyapps/zxing-android-embedded
+        //pmts saaks appi sisese ka teha
+        //st barcodeview activity vms on olemas https://github.com/journeyapps/zxing-android-embedded/blob/master/EMBEDDING.md
+        scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
+                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+                integrator.setPrompt("Skänni!");
+                integrator.setCameraId(0);  // Use a specific camera of the device // vb pole vaja
+                integrator.setBeepEnabled(false);
+                integrator.setBarcodeImageEnabled(true);
+                integrator.setOrientationLocked(true); //kuidas portrait lock saada? või kaamerale pole vaja?
+                integrator.initiateScan();
+            }
+        });
         tickets = ticketMaker( //PLACE YOUR TEXT HERE
                 "testÜritus\n" +
                         "17/06/16 19:50\n" +
@@ -101,5 +121,14 @@ public class MainActivity extends AppCompatActivity {
         }
         totalAmount.setText(Integer.toString(total));
         return result;
+    }
+
+    //scanneri vastus
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        if (scanResult != null) {
+            String result = scanResult.getContents();
+            Log.d("code", result);
+        }
     }
 }
