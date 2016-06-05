@@ -3,4 +3,5 @@
     <string name="quantity">quantity</string>
     <string name="tickettype">ticket type</string>
     <string name="total">total</string>
+    <string name="ticketString">ticket validation</string>
 </resources>

@@ -18,8 +18,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ScanActivity"
-                  android:screenOrientation="portrait">
+        <activity android:name=".ScanActivity">
             <intent-filter>
                 <action android:name="com.example.kristen.piletdemo.ScanActivity"/>
 
