@@ -27,12 +27,18 @@ public class ScanActivity extends AppCompatActivity {
     private LinearLayout space;
     private Button scan;
     private List<LinearLayout> tickets;
+    private LinearLayout totalLayout, linLayout;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
+        totalLayout = (LinearLayout) findViewById(R.id.totalLayout);
+        linLayout = (LinearLayout) findViewById(R.id.linLayout);
+        totalLayout.setVisibility(View.INVISIBLE);
+        linLayout.setVisibility(View.INVISIBLE);
+
 
         scan = (Button) findViewById(R.id.btnScan);
         //loome scanneri vms //https://github.com/journeyapps/zxing-android-embedded
@@ -121,6 +127,9 @@ public class ScanActivity extends AppCompatActivity {
         if (scanResult != null) {
             String result = scanResult.getContents();
             Log.d("code", result);
+
+            totalLayout.setVisibility(View.VISIBLE);
+            linLayout.setVisibility(View.VISIBLE);
 
             //väljade loomine
             tickets = ticketMaker(result);
