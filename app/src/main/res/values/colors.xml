@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="dafault">#93cb71</color>
-    <color name="bar">#7aa362</color>
+    <color name="dafault">#E6E6E5</color>
+    <color name="bar">#B5B3B3</color>
+    <color name="InvalidRed">#F3797B</color>
+    <color name="InvalidBar">#c56568</color>
+    <color name="Valid">#8BC976</color>
+    <color name="ValidBar">#73A365</color>
 </resources>

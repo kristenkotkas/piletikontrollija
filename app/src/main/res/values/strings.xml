@@ -4,4 +4,8 @@
     <string name="tickettype">ticket type</string>
     <string name="total">total</string>
     <string name="ticketString">ticket validation</string>
+    <string name="btnReset">reset</string>
+    <string name="btnScan">scan</string>
+    <string name="settings">settings</string>
+    <string name="btnSettings">settings</string>
 </resources>
