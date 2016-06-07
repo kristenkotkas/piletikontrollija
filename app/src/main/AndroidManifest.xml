@@ -8,9 +8,9 @@
             android:label="@string/app_name"
             android:supportsRtl="true">
         <activity
-                android:theme="@style/AppTheme"
                 android:name=".MainActivity"
-                android:screenOrientation="portrait">
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -18,9 +18,9 @@
             </intent-filter>
         </activity>
         <activity
-                android:theme="@style/AppTheme"
                 android:name=".Settings"
-                android:screenOrientation="portrait">
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="com.example.kristen.piletdemo.Settings"/>
 
@@ -28,11 +28,21 @@
             </intent-filter>
         </activity>
         <activity
-                android:theme="@style/InvalidTheme"
                 android:name=".Invdalid"
-                android:screenOrientation="portrait">
+                android:screenOrientation="portrait"
+                android:theme="@style/InvalidTheme">
             <intent-filter>
                 <action android:name="com.example.kristen.piletdemo.Invdalid"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity
+                android:theme="@style/ValidTheme"
+                android:name=".Valid"
+                android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.example.kristen.piletdemo.Valid"/>
 
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>

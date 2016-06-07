@@ -52,12 +52,10 @@ public class MainActivity extends AppCompatActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tableLay.getViewTreeObserver() != null) {
                     tableLay.removeAllViews();
                     totalLayout.setVisibility(View.INVISIBLE);
                     linLayout.setVisibility(View.INVISIBLE);
                     reset.setEnabled(false);
-                }
             }
         });
 
@@ -146,34 +144,32 @@ public class MainActivity extends AppCompatActivity {
     //scanneri vastus
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-        if (scanResult.getContents() != null) {
+        if (scanResult.getContents() != null && scanResult != null) {
             try {
-                setTheme(R.style.ValidTheme);
+                Intent intent2 = new Intent("com.example.kristen.piletdemo.Valid");
 
                 String result = scanResult.getContents();
                 Log.d("code", result);
 
-                totalLayout.setVisibility(View.VISIBLE);
-                linLayout.setVisibility(View.VISIBLE);
+                //totalLayout.setVisibility(View.VISIBLE);
+                //linLayout.setVisibility(View.VISIBLE);
 
                 //väljade loomine
                 tickets = ticketMaker(result);
-                tableLay = (TableLayout) findViewById(R.id.tabelLay);
-                tableLay.removeAllViews(); //kui midagi ees on, siis tühjendab ära
-                for (LinearLayout elem: tickets) {
-                    tableLay.addView(elem);
-                }
+                //tableLay = (TableLayout) findViewById(R.id.tabelLay);
+                //tableLay.removeAllViews(); //kui midagi ees on, siis tühjendab ära
+                //for (LinearLayout elem: tickets) {
+                //    tableLay.addView(elem);
+                //}
 
-                reset.setEnabled(true);
+                //reset.setEnabled(true);
+                startActivity(intent2);
             } catch (RuntimeException e) {
-                totalLayout.setVisibility(View.INVISIBLE);
-                linLayout.setVisibility(View.INVISIBLE);
+                //totalLayout.setVisibility(View.INVISIBLE);
+                //linLayout.setVisibility(View.INVISIBLE);
+                //todo tee tühjaks
 
-                if (tableLay.getViewTreeObserver() != null) {
-                    tableLay.removeAllViews();
-                }
-
-                reset.setEnabled(false);
+                //reset.setEnabled(false);
                 Intent intent1 = new Intent("com.example.kristen.piletdemo.Invdalid");
                 startActivity(intent1);
             }
