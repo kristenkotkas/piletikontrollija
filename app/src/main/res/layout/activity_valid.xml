@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+        android:id="@+id/relLAyValid"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -10,4 +11,68 @@
         android:paddingBottom="@dimen/activity_vertical_margin"
         tools:context="com.example.kristen.piletdemo.Valid">
 
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="40dp"
+                  android:background="#ffffff" android:layout_alignParentStart="true" android:id="@+id/linLayoutValid">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="@string/tickettype"
+                  android:id="@+id/textViewValid" android:background="#ffffff" android:textSize="25sp"
+                  android:layout_gravity="center_vertical" android:layout_marginLeft="20dp"/>
+        <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="@string/quantity"
+                  android:id="@+id/textView2Valid" android:background="#ffffff" android:textSize="25sp"
+                  android:layout_gravity="center_vertical|right" android:textAlignment="textEnd"
+                  android:layout_marginRight="20dp"/>
+    </LinearLayout>
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/scrollViewValid"
+            android:layout_alignParentEnd="true" android:layout_marginBottom="150dp"
+            android:layout_marginTop="70dp">
+        <TableLayout
+                android:id="@+id/tabelLayValid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        </TableLayout>
+    </ScrollView>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="40dp"
+                  android:background="#ffffff"
+                  android:layout_alignParentBottom="true" android:layout_alignParentStart="true"
+                  android:layout_marginBottom="90dp" android:id="@+id/totalLayoutValid">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="@string/total"
+                  android:id="@+id/textView3Valid" android:background="#ffffff" android:textSize="25sp"
+                  android:layout_gravity="center_vertical" android:layout_marginLeft="20dp"/>
+        <TextView android:layout_width="fill_parent" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:id="@+id/totalAmountValid" android:background="#ffffff" android:textSize="25sp"
+                  android:layout_gravity="center_vertical|right" android:textAlignment="textEnd"
+                  android:layout_marginRight="20dp"/>
+    </LinearLayout>
+    <Button
+            style="@style/buttonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="@string/btnReset"
+            android:id="@+id/btnResetValid"
+            android:layout_marginStart="58dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"/>
+    <Button
+            style="@style/buttonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="@string/btnScan"
+            android:id="@+id/btnScanValid"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="58dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/valid"
+            android:id="@+id/textView5" android:layout_above="@+id/btnResetValid"
+            android:layout_centerHorizontal="true" android:layout_marginBottom="10dp" android:textSize="30sp"
+            android:layout_marginTop="10dp"/>
 </RelativeLayout>

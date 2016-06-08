@@ -8,4 +8,6 @@
     <string name="btnScan">scan</string>
     <string name="settings">settings</string>
     <string name="btnSettings">settings</string>
+    <string name="valid">valid</string>
+    <string name="invalid">invalid</string>
 </resources>
