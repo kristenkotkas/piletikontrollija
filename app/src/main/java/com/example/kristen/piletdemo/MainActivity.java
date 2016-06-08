@@ -81,17 +81,18 @@ public class MainActivity extends AppCompatActivity {
         totalAmount.setText(Integer.toString(total));
     }
 
+
+
     //scanneri vastus
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanResult.getContents() != null && scanResult != null) {
+            String result = scanResult.getContents();
+            Log.d("code", result);
+            Result.setResult(result);
             try {
-                String result = scanResult.getContents();
-                Log.d("code", result);
 
                 validator(result);
-
-                Result.setResult(result);
                 startActivity(actValid);
 
             } catch (RuntimeException e) {

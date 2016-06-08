@@ -13,6 +13,7 @@ public class Invdalid extends AppCompatActivity {
     private Button scan;
     private Typeface ticketfont;
     private TextView invalid;
+    private TextView longText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +22,16 @@ public class Invdalid extends AppCompatActivity {
         reset = (Button) findViewById(R.id.btnResetInValid);
         scan = (Button) findViewById(R.id.btnScanInValid);
         invalid = (TextView) findViewById(R.id.invalidInvalid);
+        longText = (TextView) findViewById(R.id.resultInvalid);
 
         ticketfont = Typeface.createFromAsset(getAssets(), "ticketfont2.ttf");
         reset.setTypeface(ticketfont);
         scan.setTypeface(ticketfont);
         invalid.setTypeface(ticketfont);
         invalid.setTextColor(Color.WHITE);
+        longText.setTypeface(ticketfont);
+        System.out.println(Result.getResult());
+        longText.setText(Result.getResult());
 
 
         reset.setOnClickListener(new View.OnClickListener() {
