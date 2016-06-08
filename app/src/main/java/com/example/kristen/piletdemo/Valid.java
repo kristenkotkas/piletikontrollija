@@ -1,6 +1,7 @@
 package com.example.kristen.piletdemo;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +28,8 @@ public class Valid extends AppCompatActivity {
     private List<LinearLayout> tickets;
     private Button reset;
     private Button scan;
+    private Typeface ticketfont;
+    private TextView ticketType, quantity, total, valid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,19 @@ public class Valid extends AppCompatActivity {
         linLayout = (LinearLayout) findViewById(R.id.linLayoutValid);
         reset = (Button) findViewById(R.id.btnResetValid);
         scan = (Button) findViewById(R.id.btnScanValid);
+        ticketType = (TextView) findViewById(R.id.ticketTypeValid);
+        quantity = (TextView) findViewById(R.id.quantityValid);
+        total = (TextView) findViewById(R.id.totalValid);
+        valid = (TextView) findViewById(R.id.validValid);
+
+        ticketfont = Typeface.createFromAsset(getAssets(), "ticketfont2.ttf");
+
+        reset.setTypeface(ticketfont);
+        scan.setTypeface(ticketfont);
+        ticketType.setTypeface(ticketfont);
+        quantity.setTypeface(ticketfont);
+        total.setTypeface(ticketfont);
+        valid.setTypeface(ticketfont);
 
         printer();
 
@@ -77,12 +93,16 @@ public class Valid extends AppCompatActivity {
         this.ticket.setText(info);
         this.ticket.setTextSize(dp8);
         this.ticket.setBackgroundColor(Color.WHITE);
+        this.ticket.setTypeface(ticketfont);
+        this.ticket.setTextColor(Color.parseColor("#b0afb0"));
 
         this.amount.setLayoutParams(new ActionBar.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT, Gravity.RIGHT));
         this.amount.setText(Integer.toString(kogus));
         this.amount.setTextSize(dp8);
         this.amount.setBackgroundColor(Color.WHITE);
         this.amount.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+        this.amount.setTypeface(ticketfont);
+        this.amount.setTextColor(Color.parseColor("#b0afb0"));
 
         this.linLay.addView(this.ticket);
         this.linLay.addView(this.amount);
@@ -111,6 +131,8 @@ public class Valid extends AppCompatActivity {
 
         int total = 0;
         totalAmount = (TextView) findViewById(R.id.totalAmountValid);
+        totalAmount.setTypeface(ticketfont);
+        totalAmount.setTextColor(Color.parseColor("#b0afb0"));
 
         for (int i = 2; i < texts.length-1; i++) {
             total = total + Integer.parseInt(texts[i].split(": ")[1]);

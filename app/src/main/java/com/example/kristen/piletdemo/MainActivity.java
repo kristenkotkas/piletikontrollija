@@ -1,6 +1,7 @@
 package com.example.kristen.piletdemo;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,11 +20,14 @@ public class MainActivity extends AppCompatActivity {
     private Intent actSettings;
     private Intent actValid;
     private Intent actInvalid;
+    private Typeface ticketfont;
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ticketfont = Typeface.createFromAsset(getAssets(), "ticketfont2.ttf");
 
         totalLayout = (LinearLayout) findViewById(R.id.totalLayout);
         linLayout = (LinearLayout) findViewById(R.id.linLayout);
@@ -35,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         actValid = new Intent("com.example.kristen.piletdemo.Valid");
         totalLayout.setVisibility(View.INVISIBLE);
         linLayout.setVisibility(View.INVISIBLE);
+        scan.setTypeface(ticketfont);
+        settings.setTypeface(ticketfont);
 
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
         int total = 0;
         totalAmount = (TextView) findViewById(R.id.totalAmount);
         totalAmount.setText(Integer.toString(total));
-
     }
 
     //scanneri vastus
