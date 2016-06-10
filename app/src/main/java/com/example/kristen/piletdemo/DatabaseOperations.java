@@ -14,34 +14,30 @@ public class DatabaseOperations extends SQLiteOpenHelper {
 
     public DatabaseOperations(Context context) {
         super(context, TableData.TableInfo.DATABASE_NAME, null, databaseVersion);
-        Log.d("Database operatsions", "Database created");
+        Log.d("Database operations", "Database created");
     }
 
     @Override
     public void onCreate(SQLiteDatabase sdb) {
         sdb.execSQL(createQuery);
-        Log.d("Database operatsions", "Table created");
+        Log.d("Database operations", "Table created");
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-    }
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 
     public void putInformation(DatabaseOperations dop, String code) {
         SQLiteDatabase SQ = dop.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(TableData.TableInfo.VALID_CODE, code);
-        long k = SQ.insert(TableData.TableInfo.TABLE_NAME, null, cv);
-        Log.d("Database operatsions", "One row inserted");
+        SQ.insert(TableData.TableInfo.TABLE_NAME, null, cv);
+        Log.d("Database operations", "One row inserted");
     }
 
     public Cursor getInformation(DatabaseOperations dop) {
         SQLiteDatabase SQ = dop.getReadableDatabase();
         String[] columns = {TableData.TableInfo.VALID_CODE};
-        Cursor CR = SQ.query(TableData.TableInfo.TABLE_NAME, columns, null, null, null, null, null);
-
-        return CR;
+        return SQ.query(TableData.TableInfo.TABLE_NAME, columns, null, null, null, null, null);
     }
 
 }

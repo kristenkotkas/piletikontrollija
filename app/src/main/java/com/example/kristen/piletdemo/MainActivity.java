@@ -23,12 +23,9 @@ public class MainActivity extends AppCompatActivity {
     private Typeface ticketfont;
 
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         ticketfont = Typeface.createFromAsset(getAssets(), "ticketfont2.ttf");
-
         totalLayout = (LinearLayout) findViewById(R.id.totalLayout);
         linLayout = (LinearLayout) findViewById(R.id.linLayout);
         scan = (Button) findViewById(R.id.btnScan);
@@ -41,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         linLayout.setVisibility(View.INVISIBLE);
         scan.setTypeface(ticketfont);
         settings.setTypeface(ticketfont);
-
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,22 +45,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //loome scanneri vms //https://github.com/journeyapps/zxing-android-embedded
-        //pmts saaks appi sisese ka teha
-        //st barcodeview activity vms on olemas https://github.com/journeyapps/zxing-android-embedded/blob/master/EMBEDDING.md
+        //https://github.com/journeyapps/zxing-android-embedded
+        //https://github.com/journeyapps/zxing-android-embedded/blob/master/EMBEDDING.md
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Valid.exists = false;
                 IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-                integrator.setPrompt("Skänni!");
+                integrator.setPrompt("Skänni!"); // TODO: 11.06.2016 tõlge 
                 integrator.setCameraId(0);  // Use a specific camera of the device // vb pole vaja
                 integrator.setBeepEnabled(false);
                 integrator.setBarcodeImageEnabled(true);
                 integrator.setOrientationLocked(true); //kuidas portrait lock saada? või kaamerale pole vaja?
                 integrator.initiateScan();
-
             }
         });
     }
@@ -72,31 +66,30 @@ public class MainActivity extends AppCompatActivity {
     public void validator(String ticket) {
         String eventName, dateTime;
         String[] texts;
-
         texts = ticket.split("\n");
         eventName = texts[0];
         dateTime = texts[1];
-
         int total = 0;
         totalAmount = (TextView) findViewById(R.id.totalAmount);
         totalAmount.setText(Integer.toString(total));
     }
 
-
-
-    //scanneri vastus
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-        if (scanResult.getContents() != null && scanResult != null) {
+        if (scanResult != null && scanResult.getContents() != null) {
             String result = scanResult.getContents();
             Log.d("code", result);
-            Result.setResult(result);
-            try {
-                validator(result);
-                startActivity(actValid);
-
-            } catch (RuntimeException e) {
-                startActivity(actInvalid);
+            if (result.split(" ")[0].contains("Auth")) {
+                Encryption.setSecret(result);
+            } else {
+                result = Encryption.decrypt(result);
+                Result.setResult(result);
+                try {
+                    validator(result);
+                    startActivity(actValid);
+                } catch (RuntimeException e) {
+                    startActivity(actInvalid);
+                }
             }
         }
     }
