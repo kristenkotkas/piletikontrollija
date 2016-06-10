@@ -172,14 +172,16 @@ public class Valid extends AppCompatActivity {
 
     public void validation(Cursor cursor) {
         cursor.moveToFirst();
-
-        while (cursor.moveToNext()) {
-            if (cursor.getString(0).equals(code)) {
-                System.out.println("FEIL FEIL");
-                exists = true;
-                throw new RuntimeException();
+        do {
+            if (!(cursor.getCount() == 0)) {
+                if (cursor.getString(0).equals(code)) {
+                    System.out.println("FEIL FEIL");
+                    exists = true;
+                    throw new RuntimeException();
+                }
             }
         }
+        while (cursor.moveToNext());
     }
 
 }

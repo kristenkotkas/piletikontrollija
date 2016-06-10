@@ -11,4 +11,5 @@
     <string name="valid">valid</string>
     <string name="invalid">invalid</string>
     <string name="exists">ticlet already passed</string>
+    <string name="deleteEntries">delete entries</string>
 </resources>
