@@ -12,7 +12,7 @@ public class Invdalid extends AppCompatActivity {
     private Button reset;
     private Button scan;
     private Typeface ticketfont;
-    private TextView invalid;
+    public static TextView invalid;
     private TextView longText;
 
     @Override
@@ -23,30 +23,38 @@ public class Invdalid extends AppCompatActivity {
         scan = (Button) findViewById(R.id.btnScanInValid);
         invalid = (TextView) findViewById(R.id.invalidInvalid);
         longText = (TextView) findViewById(R.id.resultInvalid);
-
+        exists();
         ticketfont = Typeface.createFromAsset(getAssets(), "ticketfont2.ttf");
         reset.setTypeface(ticketfont);
         scan.setTypeface(ticketfont);
         invalid.setTypeface(ticketfont);
         invalid.setTextColor(Color.WHITE);
         longText.setTypeface(ticketfont);
-        System.out.println(Result.getResult());
+        //System.out.println(Result.getResult());
         longText.setText(Result.getResult());
 
 
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                finish();
             }
         });
 
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
                 MainActivity.scan.callOnClick();
+                finish();
             }
         });
+    }
+
+    public static void exists() {
+        System.out.println("jõuti exsists");
+        if (Valid.exists) {
+            invalid.setText(R.string.exists);
+            System.out.println("already excists");
+        }
     }
 }

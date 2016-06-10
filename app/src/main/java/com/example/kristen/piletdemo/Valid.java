@@ -1,5 +1,8 @@
 package com.example.kristen.piletdemo;
 
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.ActionBar;
@@ -26,10 +29,14 @@ public class Valid extends AppCompatActivity {
     private TextView totalAmount;
     private TableLayout tableLay;
     private List<LinearLayout> tickets;
-    private Button reset;
+    public static Button reset;
     private Button scan;
     private Typeface ticketfont;
     private TextView ticketType, quantity, total, valid;
+    private Intent actInvalid;
+    private String code;
+    private Context ctx = this;
+    public static boolean exists = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,7 @@ public class Valid extends AppCompatActivity {
         valid = (TextView) findViewById(R.id.validValid);
 
         ticketfont = Typeface.createFromAsset(getAssets(), "ticketfont2.ttf");
+        actInvalid = new Intent("com.example.kristen.piletdemo.Invdalid");
 
         reset.setTypeface(ticketfont);
         scan.setTypeface(ticketfont);
@@ -59,15 +67,15 @@ public class Valid extends AppCompatActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                finish();
             }
         });
 
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
                 MainActivity.scan.callOnClick();
+                finish();
             }
         });
     }
@@ -133,6 +141,7 @@ public class Valid extends AppCompatActivity {
         totalAmount = (TextView) findViewById(R.id.totalAmountValid);
         totalAmount.setTypeface(ticketfont);
         totalAmount.setTextColor(Color.parseColor("#b0afb0"));
+        code = eventName;
 
         for (int i = 2; i < texts.length-1; i++) {
             total = total + Integer.parseInt(texts[i].split(": ")[1]);
@@ -143,11 +152,33 @@ public class Valid extends AppCompatActivity {
     }
 
     public void printer() {
-        tableLay = (TableLayout) findViewById(R.id.tabelLayValid);
-        tableLay.removeAllViews(); //kui midagi ees on, siis tühjendab ära
-        tickets = ticketMaker(Result.getResult());
-        for (LinearLayout elem: tickets) {
-            tableLay.addView(elem);
+        try {
+            tableLay = (TableLayout) findViewById(R.id.tabelLayValid);
+            tableLay.removeAllViews(); //kui midagi ees on, siis tühjendab ära
+            tickets = ticketMaker(Result.getResult());
+            for (LinearLayout elem: tickets) {
+                tableLay.addView(elem);
+            }
+            DatabaseOperations DB = new DatabaseOperations(ctx);
+            Cursor cursor = DB.getInformation(DB);
+            validation(cursor);
+            DB.putInformation(DB, code);
+
+        } catch (Exception e) {
+            onBackPressed();
+            startActivity(actInvalid);
+        }
+    }
+
+    public void validation(Cursor cursor) {
+        cursor.moveToFirst();
+
+        while (cursor.moveToNext()) {
+            if (cursor.getString(0).equals(code)) {
+                System.out.println("FEIL FEIL");
+                exists = true;
+                throw new RuntimeException();
+            }
         }
     }
 
