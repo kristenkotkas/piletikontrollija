@@ -23,7 +23,7 @@ public class Encryption {
             return new String(cipher.doFinal(encryptedBytes));
         } catch (Exception e) {
             e.printStackTrace();
+            return encrypted;
         }
-        return null;
     }
 }

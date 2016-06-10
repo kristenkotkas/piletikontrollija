@@ -39,5 +39,4 @@ public class DatabaseOperations extends SQLiteOpenHelper {
         String[] columns = {TableData.TableInfo.VALID_CODE};
         return SQ.query(TableData.TableInfo.TABLE_NAME, columns, null, null, null, null, null);
     }
-
 }
