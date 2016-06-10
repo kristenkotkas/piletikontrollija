@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Valid.exists = false;
                 IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
                 integrator.setPrompt("Skänni!");
@@ -91,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
             Log.d("code", result);
             Result.setResult(result);
             try {
-
                 validator(result);
                 startActivity(actValid);
 
