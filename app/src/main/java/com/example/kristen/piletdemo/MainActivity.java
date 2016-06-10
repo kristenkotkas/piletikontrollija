@@ -82,7 +82,13 @@ public class MainActivity extends AppCompatActivity {
             if (result.split(" ")[0].contains("Auth")) {
                 Encryption.setSecret(result);
             } else {
-                result = Encryption.decrypt(result);
+                String[] encresult = Encryption.decrypt(result);
+                if (encresult[0].equals("valid")) {
+                    result = encresult[1];
+                } else {
+                    // TODO: 11.06.2016  
+                    result = encresult[1];
+                }
                 Result.setResult(result);
                 try {
                     validator(result);

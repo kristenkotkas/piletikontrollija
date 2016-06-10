@@ -13,17 +13,17 @@ public class Encryption {
         secret = Base64.decode(data.split(" ")[1], Base64.DEFAULT);
     }
 
-    public static String decrypt(String encrypted) {
+    public static String[] decrypt(String encrypted) {
         try {
             byte[] ivbytes = Base64.decode(encrypted.split(";")[0], Base64.DEFAULT);
             byte[] encryptedBytes = Base64.decode(encrypted.split(";")[1], Base64.DEFAULT);
             SecretKeySpec sks = new SecretKeySpec(secret, "AES");
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, sks, new IvParameterSpec(ivbytes));
-            return new String(cipher.doFinal(encryptedBytes));
+            return new String[]{"valid", new String(cipher.doFinal(encryptedBytes))};
         } catch (Exception e) {
             e.printStackTrace();
-            return encrypted;
+            return new String[]{"invalid", encrypted};
         }
     }
 }
