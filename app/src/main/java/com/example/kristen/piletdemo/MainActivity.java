@@ -1,6 +1,7 @@
 package com.example.kristen.piletdemo;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -15,10 +16,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity {
-    private LinearLayout linLayout;
-    private LinearLayout totalLayout;
-    private TextView totalAmount;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     public static Button scan;
     private Button settings;
     private RelativeLayout drawer;
@@ -29,23 +27,33 @@ public class MainActivity extends AppCompatActivity {
     private String code;
     private boolean isValid = false;
     private Locale myLocale;
+    private TextView settingsTitle;
+    private Button delete, btnEng, btnEst, btnScan;
+    private Context ctx = this;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ticketfont = Typeface.createFromAsset(getAssets(), "ticketfont2.ttf");
-        totalLayout = (LinearLayout) findViewById(R.id.totalLayout);
-        linLayout = (LinearLayout) findViewById(R.id.linLayout);
         scan = (Button) findViewById(R.id.btnScan);
         drawer = (RelativeLayout) findViewById(R.id.drawer);
-        settings = (Button) findViewById(R.id.toSettings);
         actSettings = new Intent("com.example.kristen.piletdemo.Settings");
         actInvalid = new Intent("com.example.kristen.piletdemo.Invdalid");
         actValid = new Intent("com.example.kristen.piletdemo.Valid");
-        totalLayout.setVisibility(View.INVISIBLE);
-        linLayout.setVisibility(View.INVISIBLE);
         scan.setTypeface(ticketfont);
-        settings.setTypeface(ticketfont);
+        settingsTitle = (TextView) findViewById(R.id.settingsTitle);
+        settingsTitle.setTypeface(ticketfont);
+        delete = (Button) findViewById(R.id.deleteEntries);
+        delete.setTypeface(ticketfont);
+        btnEng = (Button) findViewById(R.id.engLangBtn);
+        btnEng.setTypeface(ticketfont);
+        btnEst = (Button) findViewById(R.id.estLangBtn);
+        btnEst.setTypeface(ticketfont);
+        btnScan = (Button) findViewById(R.id.settingsScan);
+        btnScan.setTypeface(ticketfont);
+
+        btnEng.setOnClickListener(this);
+        btnEst.setOnClickListener(this);
 
         DatabaseOperations DB = new DatabaseOperations(this);
         Cursor cursor = DB.getAuthKey(DB);
@@ -53,14 +61,6 @@ public class MainActivity extends AppCompatActivity {
         if (cursor.getCount() == 0) {
             scan.setEnabled(false);
         } else scan.setEnabled(true);
-
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //finish();
-                startActivity(actSettings);
-            }
-        });
 
         loadLocale();
         //https://github.com/journeyapps/zxing-android-embedded
@@ -79,6 +79,28 @@ public class MainActivity extends AppCompatActivity {
                 integrator.initiateScan();
             }
         });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseOperations DB = new DatabaseOperations(ctx);
+                DB.getWritableDatabase().delete(TableData.TableInfo.TABLE_NAME, null, null);
+            }
+        });
+
+        btnScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
+                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+                integrator.setPrompt("Skänni!"); // TODO: 11.06.2016 tõlge
+                integrator.setCameraId(0);  // Use a specific camera of the device // vb pole vaja
+                integrator.setBeepEnabled(false);
+                integrator.setBarcodeImageEnabled(true);
+                integrator.setOrientationLocked(true); //kuidas portrait lock saada? või kaamerale pole vaja?
+                integrator.initiateScan();
+            }
+        });
+
     }
 
     public void validator(String ticket) {
@@ -99,6 +121,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void setAuthKey(String result) {
+        DatabaseOperations DB = new DatabaseOperations(this);
+        Cursor cursor = DB.getAuthKey(DB);
+        cursor.moveToFirst();
+        if (cursor.getCount() == 0) {
+            DB.putAuthKey(DB,result);
+            closeCursor(cursor);
+        }
+        else {
+            DB.getWritableDatabase().delete(TableData.TableInfo.TABLE_AUTH, null, null);
+            DB.putAuthKey(DB,result);
+            closeCursor(cursor);
+        }
+    }
+
     public void getAuthKey() {
         DatabaseOperations DB = new DatabaseOperations(this);
         Cursor cursor = DB.getAuthKey(DB);
@@ -113,8 +150,7 @@ public class MainActivity extends AppCompatActivity {
             String result = scanResult.getContents();
             Log.d("code", result);
             if (result.split(" ")[0].contains("Auth")) {
-                Result.setResult(result);
-                startActivity(actInvalid);
+                setAuthKey(result);
             } else {
                 getAuthKey();
                 String[] encresult = Encryption.decrypt(result);
@@ -172,6 +208,27 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateTexts() {
         scan.setText(R.string.btnScan);
-        settings.setText(R.string.settings);
+        settingsTitle.setText(R.string.settings);
+        btnEng.setText(R.string.engLang);
+        btnEst.setText(R.string.estLang);
+        delete.setText(R.string.deleteEntries);
+        btnScan.setText(R.string.btnScan);
+    }
+
+    @Override
+    public void onClick(View v) {
+        String lang = "en";
+        switch (v.getId()) {
+            case R.id.engLangBtn:
+                lang = "en";
+                break;
+            case R.id.estLangBtn:
+                lang = "est";
+                break;
+
+            default:
+                break;
+        }
+        changeLang(lang);
     }
 }
