@@ -46,6 +46,14 @@ public class MainActivity extends AppCompatActivity {
         linLayout.setVisibility(View.INVISIBLE);
         scan.setTypeface(ticketfont);
         settings.setTypeface(ticketfont);
+
+        DatabaseOperations DB = new DatabaseOperations(this);
+        Cursor cursor = DB.getAuthKey(DB);
+        cursor.moveToFirst();
+        if (cursor.getCount() == 0) {
+            scan.setEnabled(false);
+        } else scan.setEnabled(true);
+
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,18 +99,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void authKeyAddition(String result) {
+    public void getAuthKey() {
         DatabaseOperations DB = new DatabaseOperations(this);
         Cursor cursor = DB.getAuthKey(DB);
-        if (cursor.getCount() == 0) {
-            DB.putAuthKey(DB,result);
-            closeCursor(cursor);
-        }
-        else {
-            cursor.moveToFirst();
-            Encryption.setSecret(cursor.getString(0));
-            closeCursor(cursor);
-        }
+        cursor.moveToFirst();
+        Encryption.setSecret(cursor.getString(0));
+        closeCursor(cursor);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -111,9 +113,10 @@ public class MainActivity extends AppCompatActivity {
             String result = scanResult.getContents();
             Log.d("code", result);
             if (result.split(" ")[0].contains("Auth")) {
-                authKeyAddition(result);
+                Result.setResult(result);
+                startActivity(actInvalid);
             } else {
-                authKeyAddition("");
+                getAuthKey();
                 String[] encresult = Encryption.decrypt(result);
                 if (encresult[0].equals("valid")) {
                     result = encresult[1];

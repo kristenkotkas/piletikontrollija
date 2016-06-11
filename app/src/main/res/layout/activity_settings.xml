@@ -36,4 +36,8 @@
             android:id="@+id/engLangBtn"
             android:layout_below="@+id/deleteEntries" android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp" android:layout_marginBottom="10dp"/>
+    <Button style="@style/buttonStyle" android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="@string/btnScan" android:id="@+id/settingsScan"
+            android:paddingLeft="10dp" android:paddingRight="10dp" android:layout_below="@+id/estLangBtn"
+            android:layout_centerHorizontal="true" android:layout_marginTop="32dp"/>
 </RelativeLayout>

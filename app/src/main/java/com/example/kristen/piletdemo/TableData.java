@@ -12,6 +12,7 @@ public class TableData {
         public static final String VALID_CODE = "valid_code";
         public static final String DATABASE_NAME = "validations";
         public static final String TABLE_NAME = "valid_table";
+        public static final String TABLE_AUTH = "table_auth";
     }
 
 }
