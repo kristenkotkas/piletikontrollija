@@ -2,6 +2,7 @@ package com.example.kristen.piletdemo;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Typeface;
@@ -19,6 +20,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener{
     private Button delete, btnEng, btnEst;
     private Context ctx = this;
     private Locale myLocale;
+    private Intent actMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,14 @@ public class Settings extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        actMain = new Intent(this, MainActivity.class);
+        this.startActivity(actMain);
     }
 
     public void changeLang(String lang) {
@@ -96,6 +106,7 @@ public class Settings extends AppCompatActivity implements View.OnClickListener{
             case R.id.estLangBtn:
                 lang = "est";
                 break;
+
             default:
                 break;
         }
