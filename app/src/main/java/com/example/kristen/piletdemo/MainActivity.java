@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView settingsTitle;
     private Button delete, btnEng, btnEst, btnScan;
     private Context ctx = this;
+    private boolean isKeyScan = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,14 +70,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 Valid.exists = false;
-                IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
-                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-                integrator.setPrompt("Skänni!"); // TODO: 11.06.2016 tõlge 
-                integrator.setCameraId(0);  // Use a specific camera of the device // vb pole vaja
-                integrator.setBeepEnabled(false);
-                integrator.setBarcodeImageEnabled(true);
-                integrator.setOrientationLocked(true); //kuidas portrait lock saada? või kaamerale pole vaja?
-                integrator.initiateScan();
+                IntentIntegrator integratorTicket = new IntentIntegrator(MainActivity.this);
+                integratorTicket.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+                integratorTicket.setPrompt("Skänni!"); // TODO: 11.06.2016 tõlge
+                integratorTicket.setCameraId(0);  // Use a specific camera of the device // vb pole vaja
+                integratorTicket.setBeepEnabled(false);
+                integratorTicket.setBarcodeImageEnabled(true);
+                integratorTicket.setOrientationLocked(true); //kuidas portrait lock saada? või kaamerale pole vaja?
+                integratorTicket.initiateScan();
             }
         });
         delete.setOnClickListener(new View.OnClickListener() {
@@ -90,14 +91,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IntentIntegrator integrator = new IntentIntegrator(MainActivity.this);
-                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-                integrator.setPrompt("Skänni!"); // TODO: 11.06.2016 tõlge
-                integrator.setCameraId(0);  // Use a specific camera of the device // vb pole vaja
-                integrator.setBeepEnabled(false);
-                integrator.setBarcodeImageEnabled(true);
-                integrator.setOrientationLocked(true); //kuidas portrait lock saada? või kaamerale pole vaja?
-                integrator.initiateScan();
+                isKeyScan = true;
+                scan.callOnClick();
             }
         });
 
@@ -128,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (cursor.getCount() == 0) {
             DB.putAuthKey(DB,result);
             closeCursor(cursor);
+            scan.setEnabled(true);
         }
         else {
             DB.getWritableDatabase().delete(TableData.TableInfo.TABLE_AUTH, null, null);
@@ -150,28 +146,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String result = scanResult.getContents();
             Log.d("code", result);
             if (result.split(" ")[0].contains("Auth")) {
-                setAuthKey(result);
-            } else {
-                getAuthKey();
-                String[] encresult = Encryption.decrypt(result);
-                if (encresult[0].equals("valid")) {
-                    result = encresult[1];
-                    Result.setResult(result);
-                } else {
-                    Result.setResult(encresult[1]);
+                Result.setResult(result);
+                if (!isKeyScan) {
+                    isKeyScan = false;
+                    startActivity(actInvalid);
                 }
-                try {
-                    validator(result);
-                    if (isValid) {
-                        isValid = false;
-                        System.out.println("väks Valid sisse");
-                        startActivity(actValid);
+                else {
+                    setAuthKey(result);
+                    isKeyScan = false;
+                    Toast keyScanned = Toast.makeText(ctx, "key is scanned", Toast.LENGTH_LONG);
+                    keyScanned.show();
+                }
+            }
+            else {
+                if (!isKeyScan) {
+                    getAuthKey();
+                    String[] encresult = Encryption.decrypt(result);
+                    if (encresult[0].equals("valid")) {
+                        result = encresult[1];
+                        Result.setResult(result);
                     }
                     else {
+                        Result.setResult(encresult[1]);
                         startActivity(actInvalid);
                     }
-                } catch (Exception e) {
-                    startActivity(actInvalid);
+                    try {
+                        validator(result);
+                        if (isValid) {
+                            isValid = false;
+                            System.out.println("väks Valid sisse");
+                            startActivity(actValid);
+                        }
+                        else {
+                            startActivity(actInvalid);
+                        }
+                    } catch (Exception e) {
+                        startActivity(actInvalid);
+                    }
+                }
+                if (isKeyScan) {
+                    Toast keyScanned = Toast.makeText(ctx, "not a key", Toast.LENGTH_LONG);
+                    keyScanned.show();
+                    isKeyScan = false;
                 }
             }
         }
@@ -212,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnEng.setText(R.string.engLang);
         btnEst.setText(R.string.estLang);
         delete.setText(R.string.deleteEntries);
-        btnScan.setText(R.string.btnScan);
+        btnScan.setText(R.string.btnScanKey);
     }
 
     @Override

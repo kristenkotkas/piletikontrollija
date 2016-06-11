@@ -14,4 +14,5 @@
     <string name="deleteEntries">kustuta piletid</string>
     <string name="estLang">est</string>
     <string name="engLang">eng</string>
+    <string name="btnScanKey">skaneeri võti</string>
 </resources>
