@@ -85,15 +85,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public static void closeCursor(Cursor cursor) {
+        if (!cursor.isClosed()) {
+            cursor.close();
+        }
+    }
+
     public void authKeyAddition(String result) {
         DatabaseOperations DB = new DatabaseOperations(this);
         Cursor cursor = DB.getAuthKey(DB);
         if (cursor.getCount() == 0) {
             DB.putAuthKey(DB,result);
+            closeCursor(cursor);
         }
         else {
             cursor.moveToFirst();
             Encryption.setSecret(cursor.getString(0));
+            closeCursor(cursor);
         }
     }
 

@@ -168,6 +168,7 @@ public class Valid extends AppCompatActivity {
             Cursor cursor = DB.getInformation(DB);
             validation(cursor);
             DB.putInformation(DB, code);
+            MainActivity.closeCursor(cursor);
 
         } catch (Exception e) {
             onBackPressed();
@@ -182,6 +183,7 @@ public class Valid extends AppCompatActivity {
                 if (cursor.getString(0).equals(code)) {
                     System.out.println("FAIL FAIL");
                     exists = true;
+                    MainActivity.closeCursor(cursor);
                     throw new RuntimeException();
                 }
             }
