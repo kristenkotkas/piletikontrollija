@@ -1,6 +1,8 @@
 package com.example.kristen.piletdemo;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +11,8 @@ import android.view.View;
 import android.widget.*;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout linLayout;
@@ -23,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private Typeface ticketfont;
     private String code;
     private boolean isValid = false;
+    private Locale myLocale;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        loadLocale();
         //https://github.com/journeyapps/zxing-android-embedded
         //https://github.com/journeyapps/zxing-android-embedded/blob/master/EMBEDDING.md
         scan.setOnClickListener(new View.OnClickListener() {
@@ -107,5 +113,39 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+
+    public void changeLang(String lang) {
+        if (lang.equalsIgnoreCase(""))
+            return;
+        myLocale = new Locale(lang);
+        saveLocale(lang);
+        Locale.setDefault(myLocale);
+        android.content.res.Configuration config = new android.content.res.Configuration();
+        config.locale = myLocale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        updateTexts();
+    }
+
+
+    public void saveLocale(String lang) {
+        String langPref = "Language";
+        SharedPreferences prefs = getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(langPref, lang);
+        editor.apply();
+    }
+
+    public void loadLocale() {
+        String langPref = "Language";
+        SharedPreferences prefs = getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
+        String language = prefs.getString(langPref, "");
+        changeLang(language);
+    }
+
+    private void updateTexts() {
+        scan.setText(R.string.btnScan);
+        settings.setText(R.string.settings);
     }
 }

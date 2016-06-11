@@ -1,7 +1,9 @@
 package com.example.kristen.piletdemo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -17,6 +19,9 @@ import android.widget.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
+import static com.example.kristen.piletdemo.R.id.settingsTitle;
 
 public class Valid extends AppCompatActivity {
     private LinearLayout linLayout;
@@ -37,6 +42,7 @@ public class Valid extends AppCompatActivity {
     private String code;
     private Context ctx = this;
     public static boolean exists = false;
+    private Locale myLocale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +84,8 @@ public class Valid extends AppCompatActivity {
                 finish();
             }
         });
+
+        loadLocale();
     }
 
 
@@ -179,6 +187,44 @@ public class Valid extends AppCompatActivity {
             }
         }
         while (cursor.moveToNext());
+    }
+
+    public void changeLang(String lang) {
+        if (lang.equalsIgnoreCase(""))
+            return;
+        myLocale = new Locale(lang);
+        saveLocale(lang);
+        Locale.setDefault(myLocale);
+        android.content.res.Configuration config = new android.content.res.Configuration();
+        config.locale = myLocale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        updateTexts();
+    }
+
+
+    public void saveLocale(String lang) {
+        String langPref = "Language";
+        SharedPreferences prefs = getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(langPref, lang);
+        editor.apply();
+    }
+
+
+    public void loadLocale() {
+        String langPref = "Language";
+        SharedPreferences prefs = getSharedPreferences("CommonPrefs", Activity.MODE_PRIVATE);
+        String language = prefs.getString(langPref, "");
+        changeLang(language);
+    }
+
+    private void updateTexts() {
+        reset.setText(R.string.btnReset);
+        scan.setText(R.string.btnScan);
+        ticketType.setText(R.string.tickettype);
+        quantity.setText(R.string.quantity);
+        total.setText(R.string.total);
+        valid.setText(R.string.valid);
     }
 
 }
