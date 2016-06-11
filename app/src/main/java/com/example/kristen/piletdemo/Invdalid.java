@@ -19,6 +19,7 @@ public class Invdalid extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invalid);
+
         reset = (Button) findViewById(R.id.btnResetInValid);
         scan = (Button) findViewById(R.id.btnScanInValid);
         invalid = (TextView) findViewById(R.id.invalidInvalid);
@@ -30,7 +31,6 @@ public class Invdalid extends AppCompatActivity {
         invalid.setTypeface(ticketfont);
         invalid.setTextColor(Color.WHITE);
         longText.setTypeface(ticketfont);
-        //System.out.println(Result.getResult());
         longText.setText(Result.getResult());
 
 
@@ -52,6 +52,7 @@ public class Invdalid extends AppCompatActivity {
 
     public static void exists() {
         System.out.println("jõuti exsists");
+        System.out.println(Valid.exists);
         if (Valid.exists) {
             invalid.setText(R.string.exists);
             System.out.println("already excists");

@@ -12,4 +12,6 @@
     <string name="invalid">invalid</string>
     <string name="exists">ticlet already passed</string>
     <string name="deleteEntries">delete entries</string>
+    <string name="estLang">est</string>
+    <string name="engLang">eng</string>
 </resources>

@@ -129,21 +129,18 @@ public class Valid extends AppCompatActivity {
     }
 
     public List<LinearLayout> ticketMaker(String ticket) {
-        String eventName, dateTime;
         String[] texts;
         List<LinearLayout> result = new ArrayList<>();
 
         texts = ticket.split("\n");
-        eventName = texts[0];
-        dateTime = texts[1];
 
         int total = 0;
         totalAmount = (TextView) findViewById(R.id.totalAmountValid);
         totalAmount.setTypeface(ticketfont);
         totalAmount.setTextColor(Color.parseColor("#b0afb0"));
-        code = eventName;
+        code = texts[0];
 
-        for (int i = 2; i < texts.length-1; i++) {
+        for (int i = 3; i < texts.length-1; i++) {
             total = total + Integer.parseInt(texts[i].split(": ")[1]);
             result.add(rowMaker(texts[i].split(": ")[0], Integer.parseInt(texts[i].split(": ")[1])));
         }
@@ -175,7 +172,7 @@ public class Valid extends AppCompatActivity {
         do {
             if (!(cursor.getCount() == 0)) {
                 if (cursor.getString(0).equals(code)) {
-                    System.out.println("FEIL FEIL");
+                    System.out.println("FAIL FAIL");
                     exists = true;
                     throw new RuntimeException();
                 }

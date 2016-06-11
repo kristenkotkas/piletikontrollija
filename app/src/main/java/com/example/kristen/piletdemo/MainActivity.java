@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private Intent actValid;
     private Intent actInvalid;
     private Typeface ticketfont;
+    private String code;
+    private boolean isValid = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,14 +66,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void validator(String ticket) {
-        String eventName, dateTime;
+        System.out.println(ticket);
         String[] texts;
         texts = ticket.split("\n");
-        eventName = texts[0];
-        dateTime = texts[1];
-        int total = 0;
-        totalAmount = (TextView) findViewById(R.id.totalAmount);
-        totalAmount.setText(Integer.toString(total));
+        code = texts[0];
+
+        if (code.substring(0,3).equals("ID:")) {
+            isValid = true;
+            System.out.println("is valid code");
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -85,15 +88,21 @@ public class MainActivity extends AppCompatActivity {
                 String[] encresult = Encryption.decrypt(result);
                 if (encresult[0].equals("valid")) {
                     result = encresult[1];
+                    Result.setResult(result);
                 } else {
-                    // TODO: 11.06.2016  
-                    result = encresult[1];
+                    Result.setResult(encresult[1]);
                 }
-                Result.setResult(result);
                 try {
                     validator(result);
-                    startActivity(actValid);
-                } catch (RuntimeException e) {
+                    if (isValid) {
+                        isValid = false;
+                        System.out.println("väks Valid sisse");
+                        startActivity(actValid);
+                    }
+                    else {
+                        startActivity(actInvalid);
+                    }
+                } catch (Exception e) {
                     startActivity(actInvalid);
                 }
             }

@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">PiletDemo</string>
+    <string name="quantity">kogus</string>
+    <string name="tickettype">pileti tüüp</string>
+    <string name="total">kokku</string>
+    <string name="ticketString">pileti valideerimine</string>
+    <string name="btnReset">reset</string>
+    <string name="btnScan">skaneeri</string>
+    <string name="settings">seadistused</string>
+    <string name="btnSettings">seadistused</string>
+    <string name="valid">kehtiv</string>
+    <string name="invalid">mitte kehtiv</string>
+    <string name="exists">pilet on juba kasutatud</string>
+    <string name="deleteEntries">kustuta piletid</string>
+    <string name="estLang">est</string>
+    <string name="engLang">eng</string>
+</resources>

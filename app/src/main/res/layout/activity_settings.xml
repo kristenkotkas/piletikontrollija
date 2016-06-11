@@ -23,4 +23,17 @@
             android:text="@string/deleteEntries"
             android:id="@+id/deleteEntries" android:layout_centerVertical="true" android:layout_centerHorizontal="true"
             android:paddingLeft="10dp" android:paddingRight="10dp"/>
+    <Button
+            style="@style/buttonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/estLang"
+            android:id="@+id/estLangBtn"
+            android:layout_below="@+id/engLangBtn" android:layout_centerHorizontal="true" android:layout_marginTop="10dp"/>
+    <Button
+            style="@style/buttonStyle"
+            android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/engLang"
+            android:id="@+id/engLangBtn"
+            android:layout_below="@+id/deleteEntries" android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp" android:layout_marginBottom="10dp"/>
 </RelativeLayout>
