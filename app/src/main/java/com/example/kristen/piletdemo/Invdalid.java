@@ -97,6 +97,5 @@ public class Invdalid extends AppCompatActivity {
     private void updateTexts() {
         reset.setText(R.string.btnReset);
         scan.setText(R.string.btnScan);
-        invalid.setText(R.string.invalid);
     }
 }
