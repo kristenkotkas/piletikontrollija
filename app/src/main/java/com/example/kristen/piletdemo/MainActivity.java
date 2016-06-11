@@ -3,6 +3,7 @@ package com.example.kristen.piletdemo;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -84,14 +85,27 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void authKeyAddition(String result) {
+        DatabaseOperations DB = new DatabaseOperations(this);
+        Cursor cursor = DB.getAuthKey(DB);
+        if (cursor.getCount() == 0) {
+            DB.putAuthKey(DB,result);
+        }
+        else {
+            cursor.moveToFirst();
+            Encryption.setSecret(cursor.getString(0));
+        }
+    }
+
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanResult != null && scanResult.getContents() != null) {
             String result = scanResult.getContents();
             Log.d("code", result);
             if (result.split(" ")[0].contains("Auth")) {
-                Encryption.setSecret(result);
+                authKeyAddition(result);
             } else {
+                authKeyAddition("");
                 String[] encresult = Encryption.decrypt(result);
                 if (encresult[0].equals("valid")) {
                     result = encresult[1];
