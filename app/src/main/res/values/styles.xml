@@ -16,6 +16,11 @@
         <item name="android:background">#ffffff</item>
     </style>
 
+    <style name="myTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:drawable">@color/ValidBar</item>
+        <item name="android:background">#ff0000</item>
+    </style>
+
     <style name="InvalidTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/InvalidRed</item>
         <item name="colorPrimaryDark">@color/InvalidRed</item>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PiletDemo</string>
+    <string name="app_name">Piletikontroll</string>
     <string name="quantity">kogus</string>
     <string name="tickettype">pileti tüüp</string>
     <string name="total">kokku</string>

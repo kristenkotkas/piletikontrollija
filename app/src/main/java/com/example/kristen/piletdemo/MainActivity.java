@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,12 +16,12 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     public static Button scan;
-    private Button settings;
     private RelativeLayout drawer;
-    private Intent actSettings;
     private Intent actValid;
     private Intent actInvalid;
     private Typeface ticketfont;
@@ -37,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String scanPrompt;
     private String keyIsScanned;
     private String notKey;
-    private TextView delPressedText, deletedText, keyIsScannedText, notAKeyText;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         delete.setOnClickListener(new View.OnClickListener() {
+            private Timer timer = new Timer();
+
             @Override
             public void onClick(View v) {
                 deletePressed ++;
@@ -97,6 +99,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     deleted.show();
                 }
                 else {
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            deletePressed = 0;
+                        }
+                    }, 4000);
                     deleted.cancel();
                     delPressed.setText(getResources().getString(R.string.pressesLeft) + " " + Integer.toString(3 - deletePressed));
                     delPressed.show();
@@ -112,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+
     }
 
     public void scan() {
@@ -123,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         integratorTicket.setCameraId(0);  // Use a specific camera of the device // vb pole vaja
         integratorTicket.setBeepEnabled(false);
         integratorTicket.setBarcodeImageEnabled(true);
-        integratorTicket.setOrientationLocked(true); //kuidas portrait lock saada? või kaamerale pole vaja?
+        integratorTicket.setOrientationLocked(true); //kuidas portrait lock saada? või kaamerale pole vaja? //done
         integratorTicket.initiateScan();
     }
 
@@ -206,9 +215,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             isValid = false;
                             System.out.println("väks Valid sisse");
                             startActivity(actValid);
-                        }
-                        else {
-                            startActivity(actInvalid);
                         }
                     } catch (Exception e) {
                         startActivity(actInvalid);

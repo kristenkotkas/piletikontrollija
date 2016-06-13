@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">PiletDemo</string>
     <string name="quantity">quantity</string>
     <string name="tickettype">ticket type</string>
     <string name="total">total</string>
@@ -20,4 +19,5 @@
     <string name="notAKey">Not a key</string>
     <string name="keyIsScanned">Key is scanned</string>
     <string name="scanPrompt">Scan</string>
+    <string name="app_name">Ticket control</string>
 </resources>
