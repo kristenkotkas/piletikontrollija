@@ -7,11 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class DatabaseOperations extends SQLiteOpenHelper {
-    public static final int databaseVersion = 1;
-    public String createQuery = "CREATE TABLE " + TableData.TableInfo.TABLE_NAME +
+class DatabaseOperations extends SQLiteOpenHelper {
+    private static Context ctx;
+    private static final int databaseVersion = 1;
+    private String createQuery = "CREATE TABLE " + TableData.TableInfo.TABLE_NAME +
             "(" + TableData.TableInfo.VALID_CODE + " TEXT);";
-    public String createQuery2 = "CREATE TABLE " + TableData.TableInfo.TABLE_AUTH +
+    private String createQuery2 = "CREATE TABLE " + TableData.TableInfo.TABLE_AUTH +
             "(" + TableData.TableInfo.AUTH_KEY + " TEXT);";
 
     public DatabaseOperations(Context context) {
@@ -29,7 +30,7 @@ public class DatabaseOperations extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 
-    public void putInformation(DatabaseOperations dop, String code) {
+    void putInformation(DatabaseOperations dop, String code) {
         SQLiteDatabase SQ = dop.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(TableData.TableInfo.VALID_CODE, code);
@@ -37,13 +38,13 @@ public class DatabaseOperations extends SQLiteOpenHelper {
         Log.d("Database operations", "One row inserted");
     }
 
-    public Cursor getInformation(DatabaseOperations dop) {
+    Cursor getInformation(DatabaseOperations dop) {
         SQLiteDatabase SQ = dop.getReadableDatabase();
         String[] columns = {TableData.TableInfo.VALID_CODE};
         return SQ.query(TableData.TableInfo.TABLE_NAME, columns, null, null, null, null, null);
     }
 
-    public void putAuthKey(DatabaseOperations dop,  String authKey) {
+    void putAuthKey(DatabaseOperations dop, String authKey) {
         SQLiteDatabase SQ = dop.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(TableData.TableInfo.AUTH_KEY, authKey);
@@ -51,7 +52,7 @@ public class DatabaseOperations extends SQLiteOpenHelper {
         Log.d("Database operations", "Key added");
     }
 
-    public Cursor getAuthKey(DatabaseOperations dop) {
+    Cursor getAuthKey(DatabaseOperations dop) {
         SQLiteDatabase SQ = dop.getReadableDatabase();
         String[] columns = {TableData.TableInfo.AUTH_KEY};
         return SQ.query(TableData.TableInfo.TABLE_AUTH, columns, null, null, null, null, null);

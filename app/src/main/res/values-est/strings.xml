@@ -15,4 +15,9 @@
     <string name="estLang">est</string>
     <string name="engLang">eng</string>
     <string name="btnScanKey">skaneeri võti</string>
+    <string name="pressesLeft">Vajutusi jäänud:</string>
+    <string name="entriesDeleted">Piletid on kustutatud</string>
+    <string name="notAKey">Pole võti</string>
+    <string name="keyIsScanned">Võti on skaneeritud</string>
+    <string name="scanPrompt">Skaneeri</string>
 </resources>

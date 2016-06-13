@@ -15,4 +15,9 @@
     <string name="estLang">est</string>
     <string name="engLang">eng</string>
     <string name="btnScanKey">scan key</string>
+    <string name="pressesLeft">Presses left:</string>
+    <string name="entriesDeleted">Entries deleted</string>
+    <string name="notAKey">Not a key</string>
+    <string name="keyIsScanned">Key is scanned</string>
+    <string name="scanPrompt">Scan</string>
 </resources>

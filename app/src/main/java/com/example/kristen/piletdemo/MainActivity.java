@@ -30,7 +30,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView settingsTitle;
     private Button delete, btnEng, btnEst, btnScan;
     private Context ctx = this;
-    private boolean isKeyScan = false;
+    private boolean isKeyScan;
+    private int deletePressed = 0;
+    private Toast delPressed;
+    private Toast deleted;
+    private String scanPrompt;
+    private String keyIsScanned;
+    private String notKey;
+    private TextView delPressedText, deletedText, keyIsScannedText, notAKeyText;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ticketfont = Typeface.createFromAsset(getAssets(), "ticketfont2.ttf");
         scan = (Button) findViewById(R.id.btnScan);
         drawer = (RelativeLayout) findViewById(R.id.drawer);
-        actSettings = new Intent("com.example.kristen.piletdemo.Settings");
         actInvalid = new Intent("com.example.kristen.piletdemo.Invdalid");
         actValid = new Intent("com.example.kristen.piletdemo.Valid");
         scan.setTypeface(ticketfont);
@@ -52,6 +58,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnEst.setTypeface(ticketfont);
         btnScan = (Button) findViewById(R.id.settingsScan);
         btnScan.setTypeface(ticketfont);
+        delPressed = Toast.makeText(ctx, "", Toast.LENGTH_SHORT);
+        deleted = Toast.makeText(ctx, "", Toast.LENGTH_SHORT);
+        scanPrompt = getResources().getString(R.string.scanPrompt);
+        keyIsScanned = getResources().getString(R.string.keyIsScanned);
+        notKey = getResources().getString(R.string.notAKey);
 
         btnEng.setOnClickListener(this);
         btnEst.setOnClickListener(this);
@@ -64,27 +75,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else scan.setEnabled(true);
 
         loadLocale();
-        //https://github.com/journeyapps/zxing-android-embedded
-        //https://github.com/journeyapps/zxing-android-embedded/blob/master/EMBEDDING.md
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Valid.exists = false;
-                IntentIntegrator integratorTicket = new IntentIntegrator(MainActivity.this);
-                integratorTicket.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-                integratorTicket.setPrompt("Skänni!"); // TODO: 11.06.2016 tõlge
-                integratorTicket.setCameraId(0);  // Use a specific camera of the device // vb pole vaja
-                integratorTicket.setBeepEnabled(false);
-                integratorTicket.setBarcodeImageEnabled(true);
-                integratorTicket.setOrientationLocked(true); //kuidas portrait lock saada? või kaamerale pole vaja?
-                integratorTicket.initiateScan();
+                isKeyScan = false;
+                scan();
             }
         });
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseOperations DB = new DatabaseOperations(ctx);
-                DB.getWritableDatabase().delete(TableData.TableInfo.TABLE_NAME, null, null);
+                deletePressed ++;
+                deleted.setText(R.string.entriesDeleted);
+
+                if (deletePressed == 3) {
+                    deletePressed = 0;
+                    DatabaseOperations DB = new DatabaseOperations(ctx);
+                    DB.getWritableDatabase().delete(TableData.TableInfo.TABLE_NAME, null, null);
+                    delPressed.cancel();
+                    deleted.show();
+                }
+                else {
+                    deleted.cancel();
+                    delPressed.setText(getResources().getString(R.string.pressesLeft) + " " + Integer.toString(3 - deletePressed));
+                    delPressed.show();
+                }
             }
         });
 
@@ -92,10 +108,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 isKeyScan = true;
-                scan.callOnClick();
+                scan();
             }
         });
 
+    }
+
+    public void scan() {
+        //https://github.com/journeyapps/zxing-android-embedded
+        //https://github.com/journeyapps/zxing-android-embedded/blob/master/EMBEDDING.md
+        IntentIntegrator integratorTicket = new IntentIntegrator(this);
+        integratorTicket.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+        integratorTicket.setPrompt(scanPrompt);
+        integratorTicket.setCameraId(0);  // Use a specific camera of the device // vb pole vaja
+        integratorTicket.setBeepEnabled(false);
+        integratorTicket.setBarcodeImageEnabled(true);
+        integratorTicket.setOrientationLocked(true); //kuidas portrait lock saada? või kaamerale pole vaja?
+        integratorTicket.initiateScan();
     }
 
     public void validator(String ticket) {
@@ -123,12 +152,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (cursor.getCount() == 0) {
             DB.putAuthKey(DB,result);
             closeCursor(cursor);
+            DB.close();
             scan.setEnabled(true);
         }
         else {
             DB.getWritableDatabase().delete(TableData.TableInfo.TABLE_AUTH, null, null);
             DB.putAuthKey(DB,result);
             closeCursor(cursor);
+            DB.close();
         }
     }
 
@@ -138,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cursor.moveToFirst();
         Encryption.setSecret(cursor.getString(0));
         closeCursor(cursor);
+        DB.close();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -148,13 +180,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (result.split(" ")[0].contains("Auth")) {
                 Result.setResult(result);
                 if (!isKeyScan) {
-                    isKeyScan = false;
                     startActivity(actInvalid);
                 }
                 else {
                     setAuthKey(result);
-                    isKeyScan = false;
-                    Toast keyScanned = Toast.makeText(ctx, "key is scanned", Toast.LENGTH_LONG);
+                    Toast keyScanned = Toast.makeText(ctx, keyIsScanned, Toast.LENGTH_SHORT);
                     keyScanned.show();
                 }
             }
@@ -185,9 +215,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }
                 if (isKeyScan) {
-                    Toast keyScanned = Toast.makeText(ctx, "not a key", Toast.LENGTH_LONG);
+                    Toast keyScanned = Toast.makeText(ctx, notKey, Toast.LENGTH_SHORT);
                     keyScanned.show();
-                    isKeyScan = false;
                 }
             }
         }
@@ -229,6 +258,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnEst.setText(R.string.estLang);
         delete.setText(R.string.deleteEntries);
         btnScan.setText(R.string.btnScanKey);
+        deleted.setText(R.string.entriesDeleted);
+        scanPrompt = getResources().getString(R.string.scanPrompt);
+        keyIsScanned = getResources().getString(R.string.keyIsScanned);
+        notKey = getResources().getString(R.string.notAKey);
     }
 
     @Override

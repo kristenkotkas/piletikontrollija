@@ -169,6 +169,7 @@ public class Valid extends AppCompatActivity {
             validation(cursor);
             DB.putInformation(DB, code);
             MainActivity.closeCursor(cursor);
+            DB.close();
 
         } catch (Exception e) {
             onBackPressed();
