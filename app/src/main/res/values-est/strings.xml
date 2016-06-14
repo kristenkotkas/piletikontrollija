@@ -20,5 +20,5 @@
     <string name="notAKey">Pole võti</string>
     <string name="keyIsScanned">Võti on skaneeritud</string>
     <string name="scanPrompt">Skaneeri</string>
-    <string name="võru">Võru kiil</string>
+    <string name="võru">Võro kiil</string>
 </resources>
