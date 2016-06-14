@@ -21,7 +21,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     public static Button scan;
-    private RelativeLayout drawer;
+    private LinearLayout drawer;
     private Intent actValid;
     private Intent actInvalid;
     private Typeface ticketfont;
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean isValid = false;
     private Locale myLocale;
     private TextView settingsTitle;
-    private Button delete, btnEng, btnEst, btnScan;
+    private Button delete, btnEng, btnEst, btnScan, btnVõru;
     private Context ctx = this;
     private boolean isKeyScan;
     private int deletePressed = 0;
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ticketfont = Typeface.createFromAsset(getAssets(), "ticketfont2.ttf");
         scan = (Button) findViewById(R.id.btnScan);
-        drawer = (RelativeLayout) findViewById(R.id.drawer);
+        drawer = (LinearLayout) findViewById(R.id.drawer);
         actInvalid = new Intent("com.example.kristen.piletdemo.Invdalid");
         actValid = new Intent("com.example.kristen.piletdemo.Valid");
         scan.setTypeface(ticketfont);
@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnEst.setTypeface(ticketfont);
         btnScan = (Button) findViewById(R.id.settingsScan);
         btnScan.setTypeface(ticketfont);
+        btnVõru = (Button) findViewById(R.id.võruLangBtn);
+        btnVõru.setTypeface(ticketfont);
         delPressed = Toast.makeText(ctx, "", Toast.LENGTH_SHORT);
         deleted = Toast.makeText(ctx, "", Toast.LENGTH_SHORT);
         scanPrompt = getResources().getString(R.string.scanPrompt);
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnEng.setOnClickListener(this);
         btnEst.setOnClickListener(this);
+        btnVõru.setOnClickListener(this);
 
         DatabaseOperations DB = new DatabaseOperations(this);
         Cursor cursor = DB.getAuthKey(DB);
@@ -280,7 +283,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.estLangBtn:
                 lang = "est";
                 break;
-
+            case R.id.võruLangBtn:
+                lang = "et";
+                break;
             default:
                 break;
         }

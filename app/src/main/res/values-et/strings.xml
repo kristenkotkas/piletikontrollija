@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ticket control</string>
+    <string name="btnReset">tagasi</string>
+    <string name="btnSettings">säädistüs</string>
+    <string name="estLang">Eesti keel</string>
+    <string name="quantity">ports</string>
+    <string name="settings">säädistüs</string>
+    <string name="tickettype">lubatähe muud</string>
+    <string name="total">kokko</string>
+    <string name="võru">Võru kiil</string>
+    <string name="btnScan">todo</string>
+    <string name="btnScanKey">todo</string>
+    <string name="deleteEntries">todo</string>
+    <string name="engLang">English</string>
+    <string name="entriesDeleted">todo</string>
+    <string name="exists">todo</string>
+    <string name="invalid">todo</string>
+    <string name="keyIsScanned">todo</string>
+    <string name="notAKey">todo</string>
+    <string name="pressesLeft">todo</string>
+    <string name="scanPrompt">todo</string>
+    <string name="ticketString">todo</string>
+    <string name="valid">todo</string>
+</resources>

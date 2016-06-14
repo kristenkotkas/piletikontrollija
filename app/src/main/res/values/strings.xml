@@ -3,16 +3,16 @@
     <string name="tickettype">ticket type</string>
     <string name="total">total</string>
     <string name="ticketString">ticket validation</string>
-    <string name="btnReset">reset</string>
+    <string name="btnReset">tagasi</string>
     <string name="btnScan">scan</string>
     <string name="settings">settings</string>
     <string name="btnSettings">settings</string>
     <string name="valid">valid</string>
     <string name="invalid">invalid</string>
     <string name="exists">ticlet already passed</string>
-    <string name="deleteEntries">delete entries</string>
-    <string name="estLang">est</string>
-    <string name="engLang">eng</string>
+    <string name="deleteEntries">delete tickets</string>
+    <string name="estLang">Eesti keel</string>
+    <string name="engLang">English</string>
     <string name="btnScanKey">scan key</string>
     <string name="pressesLeft">Presses left:</string>
     <string name="entriesDeleted">Entries deleted</string>
@@ -20,4 +20,5 @@
     <string name="keyIsScanned">Key is scanned</string>
     <string name="scanPrompt">Scan</string>
     <string name="app_name">Ticket control</string>
+    <string name="võru">Võru kiil</string>
 </resources>
