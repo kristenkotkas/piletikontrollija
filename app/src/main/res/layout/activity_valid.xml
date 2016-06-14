@@ -12,7 +12,8 @@
         tools:context="com.example.kristen.piletdemo.Valid">
 
     <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="40dp"
-                  android:background="#ffffff" android:layout_alignParentStart="true" android:id="@+id/linLayoutValid">
+                  android:background="#ffffff" android:layout_alignParentStart="true" android:id="@+id/linLayoutValid"
+                  android:layout_marginLeft="10dp" android:layout_marginRight="10dp">
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:textAppearance="?android:attr/textAppearanceMedium" android:text="@string/tickettype"
                   android:id="@+id/ticketTypeValid" android:background="#ffffff" android:textSize="25sp"
@@ -29,7 +30,8 @@
             android:layout_height="fill_parent"
             android:id="@+id/scrollViewValid"
             android:layout_alignParentEnd="true" android:layout_marginBottom="170dp"
-            android:layout_marginTop="70dp" android:paddingLeft="5dp" android:paddingRight="5dp">
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="10dp" android:layout_marginRight="10dp">
         <TableLayout
                 android:id="@+id/tabelLayValid"
                 android:layout_width="match_parent"
@@ -39,7 +41,8 @@
     <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="40dp"
                   android:background="#ffffff"
                   android:layout_alignParentBottom="true" android:layout_alignParentStart="true"
-                  android:layout_marginBottom="110dp" android:id="@+id/totalLayoutValid">
+                  android:layout_marginBottom="110dp" android:id="@+id/totalLayoutValid"
+                  android:layout_marginLeft="10dp" android:layout_marginRight="10dp">
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:textAppearance="?android:attr/textAppearanceMedium" android:text="@string/total"
                   android:id="@+id/totalValid" android:background="#ffffff" android:textSize="25sp"

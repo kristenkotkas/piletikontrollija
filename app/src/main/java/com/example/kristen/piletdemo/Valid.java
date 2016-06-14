@@ -98,12 +98,13 @@ public class Valid extends AppCompatActivity {
         int dp20 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, getResources().getDisplayMetrics()); //laseb määrata dp suurusi
         int dp10 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics()); //laseb määrata dp suurusi
         int dp8 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics()); //laseb määrata dp suurusi
+        int dp4 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics()); //laseb määrata dp suurusi
 
 
         this.linLay.setOrientation(LinearLayout.HORIZONTAL);
         this.linLay.setMinimumHeight(dp40);
         this.linLay.setBackgroundColor(Color.WHITE);
-        this.linLay.setPadding(dp20,0,dp20,0); //left, top, right, bottom
+        this.linLay.setPadding(dp20,dp4,dp20,0); //left, top, right, bottom
 
         this.ticket.setLayoutParams(new ActionBar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.FILL_PARENT, Gravity.LEFT));
         this.ticket.setText(info);
