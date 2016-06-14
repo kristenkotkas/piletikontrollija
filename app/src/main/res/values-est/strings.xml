@@ -4,7 +4,7 @@
     <string name="tickettype">pileti tüüp</string>
     <string name="total">kokku</string>
     <string name="ticketString">pileti valideerimine</string>
-    <string name="btnReset">tühista</string>
+    <string name="btnReset">tagasi</string>
     <string name="btnScan">skaneeri</string>
     <string name="settings">seadistused</string>
     <string name="btnSettings">seadistused</string>

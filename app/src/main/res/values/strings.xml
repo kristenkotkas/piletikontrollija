@@ -3,13 +3,13 @@
     <string name="tickettype">ticket type</string>
     <string name="total">total</string>
     <string name="ticketString">ticket validation</string>
-    <string name="btnReset">tagasi</string>
+    <string name="btnReset">back</string>
     <string name="btnScan">scan</string>
     <string name="settings">settings</string>
     <string name="btnSettings">settings</string>
     <string name="valid">valid</string>
     <string name="invalid">invalid</string>
-    <string name="exists">ticlet already passed</string>
+    <string name="exists">ticket already used</string>
     <string name="deleteEntries">delete tickets</string>
     <string name="estLang">Eesti keel</string>
     <string name="engLang">English</string>
