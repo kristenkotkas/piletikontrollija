@@ -19,4 +19,4 @@ Allalaadimised (varsti tekivad)
 Piletikontrollija saab androidile alla laadida kasutades Google Play-d.
 Saadaval on ka .apk variant, mille leiab allalaadimiste alt.
 
-Piletikontrollija nõuab vähemalt Android 4.0 (Ice Cream Sandwich) olemasolu.
+Piletikontrollija nõuab vähemalt Android 4.2 (Jelly Bean) olemasolu.
