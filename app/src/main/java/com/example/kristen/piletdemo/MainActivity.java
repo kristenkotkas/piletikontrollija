@@ -132,10 +132,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         IntentIntegrator integratorTicket = new IntentIntegrator(this);
         integratorTicket.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
         integratorTicket.setPrompt(scanPrompt);
-        integratorTicket.setCameraId(0);  // Use a specific camera of the device // vb pole vaja
+        integratorTicket.setCameraId(0);
         integratorTicket.setBeepEnabled(false);
         integratorTicket.setBarcodeImageEnabled(true);
-        integratorTicket.setOrientationLocked(true); //kuidas portrait lock saada? või kaamerale pole vaja? //done
+        integratorTicket.setOrientationLocked(true);
         integratorTicket.initiateScan();
     }
 
