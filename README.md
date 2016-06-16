@@ -11,10 +11,10 @@ mille põhjal saab kontrollija otsustada, kas inimene sisse lasta või mitte.
 
 Urbanify enda leiab siit: [Urbanify](https://bitbucket.org/urban-team/urbanify)
 
-Allalaadimised (varsti tekivad)
+Allalaadimised
 --------------
 
-(Play store link lisada)
+[Piletikontrollija Google Play-s](https://play.google.com/store/apps/details?id=com.urban.kristen.piletdemo)
 
 Piletikontrollija saab androidile alla laadida kasutades Google Play-d.
 Saadaval on ka .apk variant, mille leiab allalaadimiste alt.
