@@ -7,16 +7,15 @@ Kui klient näitab piletit, siis seda vastava rakendusega skaneerides saab teada
 selle piletiga juba sisenetud pole. Pärast skaneerimist näidatakse kogu piletilt loetud info telefoni ekraanile,
 mille põhjal saab kontrollija otsustada, kas inimene sisse lasta või mitte.
 
-(Manuaal lisada)
+Urbanify kasutusjuhend: [Urbanify_user_manual.pdf](https://bitbucket.org/urban-team/urbanify/downloads/Urbanify_user_manual.pdf)
 
 Urbanify enda leiab siit: [Urbanify](https://bitbucket.org/urban-team/urbanify)
 
 Allalaadimised
 --------------
 
-[Piletikontrollija Google Play-s](https://play.google.com/store/apps/details?id=com.urban.kristen.piletdemo)
+Piletikontrollija saab androidile alla laadida Google Play-st: [Piletikontrollija](https://play.google.com/store/apps/details?id=com.urban.kristen.piletdemo)  
+Saadaval on ka .apk variant: [Piletikontrollija.apk](https://bitbucket.org/urban-team/piletikontrollija/downloads/Piletikontrollija.apk)
 
-Piletikontrollija saab androidile alla laadida kasutades Google Play-d.
-Saadaval on ka .apk variant, mille leiab allalaadimiste alt.
-
-Piletikontrollija nõuab vähemalt Android 4.2 (Jelly Bean) olemasolu.
+Piletikontrollija nõuab vähemalt Android 4.2 (Jelly Bean) olemasolu.  
+Allalaadimised on kättesaadavad ka siit: [Alternatiivne allalaadimiskoht](http://bit.ly/1XYv3MJ)
