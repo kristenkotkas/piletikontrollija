@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Piledikontroll</string>
+    <string name="app_name">Lubatähekontroll</string>
     <string name="btnReset">tagasi</string>
-    <string name="btnSettings">säädistüs</string>
+    <string name="btnSettings">säädistüsõ</string>
     <string name="estLang">Eesti keel</string>
     <string name="quantity">ports</string>
-    <string name="settings">säädistüs</string>
-    <string name="tickettype">piledi muud</string>
+    <string name="settings">säädistüsõ</string>
+    <string name="tickettype">lubatähe muud</string>
     <string name="total">kokko</string>
     <string name="võru">Võro kiil</string>
-    <string name="btnScan">loe pilti</string>
-    <string name="btnScanKey">loe võtit</string>
-    <string name="deleteEntries">kistuta piletid</string>
+    <string name="btnScan">skaneeri</string>
+    <string name="btnScanKey">skaneeri võti</string>
+    <string name="deleteEntries">kistuta lubatähed</string>
     <string name="engLang">English</string>
-    <string name="entriesDeleted">Piletid om kistutatud</string>
-    <string name="exists">pilet om joba pruugitud</string>
+    <string name="entriesDeleted">Lubatähed om kistutatud</string>
+    <string name="exists">lubatäht om joba pruugitu</string>
     <string name="invalid">mitte masva</string>
-    <string name="keyIsScanned">Võti om sisse loedu</string>
+    <string name="keyIsScanned">Võti om skaneeritü</string>
     <string name="notAKey">Olõ-õi võti</string>
     <string name="pressesLeft">Vaotusi jäänü:</string>
-    <string name="scanPrompt">Näüda pilti</string>
-    <string name="ticketString">piledi kontrolminõ</string>
+    <string name="scanPrompt">Skaneeri</string>
+    <string name="ticketString">lubatähe validiirmine</string>
     <string name="valid">kõlbas</string>
 </resources>
