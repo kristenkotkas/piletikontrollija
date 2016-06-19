@@ -1,4 +1,4 @@
-package com.example.kristen.piletdemo;
+package com.urban.ticket.control;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,8 +20,6 @@ import android.widget.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import static com.example.kristen.piletdemo.R.id.settingsTitle;
 
 public class Valid extends AppCompatActivity {
     private LinearLayout linLayout;
@@ -59,7 +57,7 @@ public class Valid extends AppCompatActivity {
         valid = (TextView) findViewById(R.id.validValid);
 
         ticketfont = Typeface.createFromAsset(getAssets(), "ticketfont2.ttf");
-        actInvalid = new Intent("com.example.kristen.piletdemo.Invdalid");
+        actInvalid = new Intent("com.urban.ticket.control.Invdalid");
 
         reset.setTypeface(ticketfont);
         scan.setTypeface(ticketfont);

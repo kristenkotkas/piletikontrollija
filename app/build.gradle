@@ -9,7 +9,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.example.kristen.piletdemo"
+        applicationId "com.urban.ticket.control"
         minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
