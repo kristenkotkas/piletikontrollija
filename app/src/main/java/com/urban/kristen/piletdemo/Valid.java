@@ -1,4 +1,4 @@
-package com.urban.ticket.control;
+package com.urban.kristen.piletdemo;
 
 import android.app.Activity;
 import android.content.Context;
@@ -57,7 +57,7 @@ public class Valid extends AppCompatActivity {
         valid = (TextView) findViewById(R.id.validValid);
 
         ticketfont = Typeface.createFromAsset(getAssets(), "ticketfont2.ttf");
-        actInvalid = new Intent("com.urban.ticket.control.Invdalid");
+        actInvalid = new Intent("com.urban.kristen.piletdemo.Invdalid");
 
         reset.setTypeface(ticketfont);
         scan.setTypeface(ticketfont);

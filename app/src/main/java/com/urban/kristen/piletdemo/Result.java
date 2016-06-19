@@ -1,4 +1,4 @@
-package com.urban.ticket.control;
+package com.urban.kristen.piletdemo;
 
 public class Result {
     private static String resultString;

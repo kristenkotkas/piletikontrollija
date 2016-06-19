@@ -1,4 +1,4 @@
-package com.urban.ticket.control;
+package com.urban.kristen.piletdemo;
 
 import android.app.Activity;
 import android.content.Context;
@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ticketfont = Typeface.createFromAsset(getAssets(), "ticketfont2.ttf");
         scan = (Button) findViewById(R.id.btnScan);
         drawer = (LinearLayout) findViewById(R.id.drawer);
-        actInvalid = new Intent("com.urban.ticket.control.Invdalid");
-        actValid = new Intent("com.urban.ticket.control.Valid");
+        actInvalid = new Intent("com.urban.kristen.piletdemo.Invdalid");
+        actValid = new Intent("com.urban.kristen.piletdemo.Valid");
         scan.setTypeface(ticketfont);
         settingsTitle = (TextView) findViewById(R.id.settingsTitle);
         settingsTitle.setTypeface(ticketfont);
