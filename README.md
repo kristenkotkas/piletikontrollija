@@ -14,8 +14,8 @@ Urbanify enda leiab siit: [Urbanify](https://bitbucket.org/urban-team/urbanify)
 Allalaadimised
 --------------
 
-Piletikontrollija saab androidile alla laadida Google Play-st: [Piletikontrollija](https://play.google.com/store/apps/details?id=com.urban.kristen.piletdemo)  
-Saadaval on ka .apk variant: [Piletikontrollija.apk](https://bitbucket.org/urban-team/piletikontrollija/downloads/Piletikontrollija.apk)
+Piletikontrollija saab androidile alla laadida Google Play-st: [Ticket control](https://play.google.com/store/apps/details?id=com.urban.kristen.piletdemo)  
+Saadaval on ka .apk variant: [Ticket control.apk](https://bitbucket.org/urban-team/piletikontrollija/downloads/Ticket%20control.apk)
 
 Piletikontrollija nõuab vähemalt Android 4.2 (Jelly Bean) olemasolu.  
 Allalaadimised on kättesaadavad ka siit: [Alternatiivne allalaadimiskoht](http://bit.ly/1XYv3MJ)
