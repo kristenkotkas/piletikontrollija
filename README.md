@@ -18,4 +18,4 @@ Piletikontrollija saab androidile alla laadida Google Play-st: [Ticket control](
 Saadaval on ka .apk variant: [Ticket control.apk](https://bitbucket.org/urban-team/piletikontrollija/downloads/Ticket%20control.apk)
 
 Piletikontrollija nõuab vähemalt Android 4.2 (Jelly Bean) olemasolu.  
-Allalaadimised on kättesaadavad ka siit: [Alternatiivne allalaadimiskoht](http://bit.ly/1XYv3MJ)
+Allalaadimised on kättesaadavad ka siit: [Alternatiivne allalaadimiskoht](http://xn--kngas-kva.eu/urbanify/)
