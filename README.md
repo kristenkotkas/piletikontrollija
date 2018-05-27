@@ -9,7 +9,7 @@ mille põhjal saab kontrollija otsustada, kas inimene sisse lasta või mitte.
 
 Urbanify kasutusjuhend: [Urbanify_user_manual.pdf](https://bitbucket.org/urban-team/urbanify/downloads/Urbanify_user_manual.pdf)
 
-Urbanify enda leiab siit: [Urbanify](https://bitbucket.org/urban-team/urbanify)
+Urbanify enda leiab siit: [Urbanify](https://github.com/kristjanhk/urbanify)
 
 Allalaadimised
 --------------
